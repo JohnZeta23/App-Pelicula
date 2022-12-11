@@ -74,7 +74,9 @@ const trailerPut = async (req, res = response) => {
          res.status(406).json({ "error": "action not allowed" })
       } else if (state) {
 
-         const { public_id, secure_url } = await imgUpdate(dbPublicId, newIMGPath)
+        const { public_id, secure_url } = (!dbPublicId)
+            ? await imgUpdate(dbPublicId, newIMGPath)
+            : await imgUpload(newIMGPath)
 
          schema.img = {
             public_id,
