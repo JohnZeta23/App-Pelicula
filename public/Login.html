@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="./assets/css/Login.css">
+</head>
+<body onload="checarSesion()">
+
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="./Pagina-Principal.html">
+            <img src="./img/palomitas-de-maiz.png" alt="" width="58" height="58">
+            Trailer-Soto
+          </a>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="text-center">
+            <img src="./img/palomitas-de-maiz.png" alt="logo" class="mt-5" width="150px">
+            <h3 class="mt-2">Login para administradores</h3>
+            <form id="formIniciar">
+                <div class="mb-3">
+                    <label for="correo" class="form-label">Correo electronico</label>
+                    <input type="email" class="form-control" id="correo" placeholder="name@example.com">
+                  </div>
+                  <div class="mb-3">
+                    <label for="password" class="form-label">Contraseña</label>
+                    <input type="password" class="form-control" id="password" placeholder="password">
+                  </div>
+                  <div class="mb-3">
+                    <input type="button" class="btn btn-success form-control" value="Iniciar Sesion" onclick="Login()">
+                  </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="text-center" id="alertas">
+        </div>
+    </div>
+
+    <script src="./assets/js/Login.js"></script>
+    <script src="./assets/js/CRUD-Peliculas.js"></script>
+</body>
+</html>
