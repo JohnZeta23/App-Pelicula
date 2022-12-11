@@ -5,7 +5,6 @@ const {
    validateFields,
    rolesAllowed,
    validateJWT,
-   imgUpload
 } = require('../middlewares')
 
 const {
@@ -23,11 +22,10 @@ const router = Router()
 const roles = ['ADMIN', 'SUPER']
 
 
-router.get('/', validateJWT, trailersGet)
+router.get('/', trailersGet)
 
 router.get('/:id',
    [
-      validateJWT,
       check('id', 'Invalid id').isMongoId(),
       check('id').custom(trailerExist),
       validateFields
@@ -41,7 +39,6 @@ router.post('/',
       check('year', 'Year requiered').not().isEmpty(),
       check('trailer_link', 'Trailer link requiered').not().isEmpty(),
       validateFields,
-      //imgUpload,
    ], trailerPost)
 
 router.put('/:id',

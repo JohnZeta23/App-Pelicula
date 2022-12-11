@@ -65,6 +65,7 @@ const trailerPut = async (req, res = response) => {
    const { _id, ...schema } = req.body
    const newIMGPath = req.files.img.tempFilePath
 
+   console.log(req.files.img);
    try {
       const {state, img } = await Movie.findById(id)
       const dbPublicId = img.public_id
@@ -92,7 +93,7 @@ const trailerPut = async (req, res = response) => {
       if (req.files?.img) {
          await fs.unlink(newIMGPath)
       }
-      res.status(400).json({error})
+      res.status(400).json({"message": error"})
 
    }
 }
