@@ -74,7 +74,9 @@ const trailerPut = async (req, res = response) => {
          res.status(406).json({ "error": "action not allowed" })
       } else if (state) {
 
-         const { public_id, secure_url } = await imgUpdate(dbPublicId, newIMGPath)
+        const { public_id, secure_url } = (dbPublicId)
+            ? await imgUpdate(dbPublicId, newIMGPath)
+            : await imgUpload(newIMGPath)
 
          schema.img = {
             public_id,
@@ -92,7 +94,7 @@ const trailerPut = async (req, res = response) => {
       if (req.files?.img) {
          await fs.unlink(newIMGPath)
       }
-      res.status(400).json({error})
+      res.status(400).json({"message": `${error.message}`})
 
    }
 }

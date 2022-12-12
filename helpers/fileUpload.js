@@ -17,15 +17,9 @@ const imgDelete = async(public_id) => {
 const imgUpdate = async (dbPublicId, newIMGPath) => {
 
    const { result } = await imgDelete(dbPublicId)
-<<<<<<< HEAD
+
    if (result === "ok") {
       const { public_id, secure_url } = await imgUpload(newIMGPath)
-
-
-
-
-
-
 
       return { public_id, secure_url }
    }
@@ -35,19 +29,6 @@ const imgUpdate = async (dbPublicId, newIMGPath) => {
       return { err_msg: "Try again later." }
    }
 
-
-
-=======
-   if (result === "not found")
-      console.error("Please provide correct public_id")
-   if (result !== "ok")
-      console.error("Try again later.")
-
-   const { public_id, secure_url } = await imgUpload(newIMGPath)
-
-
-   return { public_id, secure_url }
->>>>>>> 3e06b0d (Frontend terminado)
 }
 
 

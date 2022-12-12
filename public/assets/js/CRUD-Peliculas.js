@@ -33,7 +33,7 @@ const cerrarSesion = ()=>{
 
 const cargarPeliculas = async()=>{
 
-    let respuesta = await fetch("http://localhost:8080/api/trailer",{
+    let respuesta = await fetch("http://localhost:8080/api/trailer/?limit=15",{
         credentials: 'same-origin',
         headers: {
         'Content-Type': 'application/json'}
@@ -55,7 +55,7 @@ const cargarPeliculas = async()=>{
         <td>${resultado.trailers[contador].directors}</td>
         <td>${resultado.trailers[contador].cast}</td>
         <td>${resultado.trailers[contador].rating}</td>
-        <td>${resultado.trailers[contador].img.imgURL}</td>
+        <td><img src="${resultado.trailers[contador].img.imgURL}" alt="" width = "200px"></td>
         <td>${resultado.trailers[contador].trailer_link}</td>
         <td><button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editarModal" onclick="buscarPeliculaPorId('${resultado.trailers[contador].uid}')"><i class="bi bi-pencil-square p-1"></i></i></button></td>
         <td><button class="btn btn-danger" onclick="eliminarPelicula('${resultado.trailers[contador].uid}')"><i class="bi bi-trash p-1"></i></i></button></td>
@@ -68,8 +68,10 @@ const cargarPeliculas = async()=>{
 };
 
 
+document.querySelector("#agregarForm").addEventListener("submit", async function(e){
 
-const agregarPelicula = async() =>{
+    e.preventDefault();
+
     let title = document.querySelector("#title").value;
     let year = parseInt(document.querySelector("#year").value);
     let directors = document.querySelector("#director").value;
@@ -98,14 +100,16 @@ const agregarPelicula = async() =>{
             body: datos,
             credentials: 'same-origin',
             headers: {
-            'Content-Type': 'multipart/form-data; boundary=<calculated when request is sent>',
             "x-token":token}
         });
     
-        document.querySelector("#agregarForm").reset();
         cargarPeliculas();
     };
-}; 
+
+});
+
+// const agregarPelicula = async() =>{
+// }; 
 
 const eliminarPelicula = async (peliculaID)=>{
 
@@ -144,13 +148,15 @@ const buscarPeliculaPorId = async (peliculaID)=>{
     
 };
 
-const editarPelicula = async() =>{
+
+document.querySelector("#editarForm").addEventListener('submit',async function(){
+
     let id = document.querySelector("#idPelicula").value;
     let title = document.querySelector("#titleEditar").value;
     let year = parseInt(document.querySelector("#yearEditar").value);
     let director = document.querySelector("#directorEditar").value;
     let cast = document.querySelector("#castEditar").value;
-    let img = document.querySelector("#imgEditar").value;
+    let img = document.querySelector("#imgEditar");
     let rating = parseInt(document.querySelector("#ratingEditar").value);
     let trailer_link = document.querySelector("#linkEditar").value;
     if(validateTxt(title) == true){
@@ -171,11 +177,10 @@ const editarPelicula = async() =>{
             body: datos,
             credentials: 'same-origin',
             headers: {
-            'Content-Type': 'multipart/form-data; boundary=<calculated when request is sent>',
             "x-token":token}
         });
     
-        document.querySelector("#editarForm").reset();
         cargarPeliculas();
     };
-}; 
+
+}); 
