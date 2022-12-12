@@ -2,7 +2,7 @@ const { request, response } = require('express')
 const fs = require('fs-extra')
 
 const { Movie } = require('../models')
-const { imgUpload, imgUpdate }=require('../helpers')
+const { imgUpload, imgDelete, imgUpdate }=require('../helpers')
 
 const trailersGet = async (req, res = response) => {
    const { from = 0, limit = 5 } = req.query
