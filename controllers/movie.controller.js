@@ -101,6 +101,9 @@ const trailerPut = async (req, res = response) => {
 
 const trailerDelete = async (req = request, res = response) => {
    const { id } = req.params
+   
+   const dbPublicId = img.public_id
+   await imgDelete(dbPublicId)
 
    const trailer = await Movie.findByIdAndDelete(id)
 
