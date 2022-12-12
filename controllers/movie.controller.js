@@ -10,7 +10,7 @@ const trailersGet = async (req, res = response) => {
 
    const [totalTrailers, trailers] = await Promise.all([
       Movie.countDocuments(query),
-      Movie.find(query)
+      Movie.find(query).sort({ createdAt: -1 })
          .skip(Number(from))
          .limit(Number(limit))
    ])
@@ -25,6 +25,10 @@ const trailerGetById = async (req, res = response) => {
    const { id } = req.params
 
    const trailer = await Movie.findById(id)
+
+   if (!trailer.state) {
+      res.json(204)
+   }
 
    res.json({ trailer })
 }
@@ -101,7 +105,7 @@ const trailerPut = async (req, res = response) => {
 
 const trailerDelete = async (req = request, res = response) => {
    const { id } = req.params
-   
+
    const dbPublicId = img.public_id
    await imgDelete(dbPublicId)
 
