@@ -23,7 +23,7 @@ const cargarPeliculas = async()=>{
         <li>Año de lanzamiento: ${resultado.trailers[contador].year}</li>
         <li>Director(res): ${resultado.trailers[contador].directors}</li>
         <li>Cast: ${resultado.trailers[contador].cast}</li>
-        <li>Cast: ${resultado.trailers[contador].rating}</li>
+        <li>Rating: ${resultado.trailers[contador].rating}</li>
         </ul></td>
         </tr>
         `
