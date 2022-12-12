@@ -67,29 +67,36 @@ const trailerPost = async (req, res = response) => {
 const trailerPut = async (req, res = response) => {
    const { id } = req.params
    const { _id, ...schema } = req.body
-   const newIMGPath = req.files.img.tempFilePath
 
    try {
       const {state, img } = await Movie.findById(id)
       const dbPublicId = img.public_id
-
+      const imgURL = img.imgURL
 
       if (!state) {
          res.status(406).json({ "error": "action not allowed" })
       } else if (state) {
 
-         if (req.files?.img ) {
+         if (req.files) {
+            const newIMGPath = req.files.img.tempFilePath
 
             const { public_id, secure_url } = (dbPublicId)
-            ? await imgUpdate(dbPublicId, newIMGPath)
-            : await imgUpload(newIMGPath)
+               ? await imgUpdate(dbPublicId, newIMGPath)
+               : await imgUpload(newIMGPath)
 
+               schema.img = {
+                  public_id,
+                  imgURL: secure_url
+               }
+         }else{
             schema.img = {
-               public_id,
-            imgURL: secure_url
+               public_id: dbPublicId,
+               imgURL
+            }
          }
-         await fs.unlink(newIMGPath)
-      }
+
+         if (req.files) await fs.unlink(req.files.img.tempFilePath)
+
 
          const trailer = await Movie.findByIdAndUpdate(id, schema, {new:true})
 
@@ -98,9 +105,8 @@ const trailerPut = async (req, res = response) => {
       }
    } catch (error) {
 
-      if (req.files?.img) {
-         await fs.unlink(newIMGPath)
-      }
+      if (req.files) await fs.unlink(req.files.img.tempFilePath)
+
       res.status(400).json({"message": `${error.message}`})
 
    }
