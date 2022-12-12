@@ -1,6 +1,6 @@
 const cargarPeliculas = async()=>{
 
-    let respuesta = await fetch("http://localhost:8080/api/trailer",{
+    let respuesta = await fetch("http://localhost:8080/api/trailer/?limit=15",{
         credentials: 'same-origin',
         headers: {
         'Content-Type': 'application/json'}
@@ -18,7 +18,7 @@ const cargarPeliculas = async()=>{
         <tr class="justify-content-center">
         <td><iframe width="560" height="315" src="${resultado.trailers[contador].trailer_link}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td>
         <td><ul>
-        <img src="${resultado.trailers[contador].img}" alt=""></li>
+        <img src="${resultado.trailers[contador].img.imgURL}" alt="">
         <li>Titulo: ${resultado.trailers[contador].title}</li>
         <li>Año de lanzamiento: ${resultado.trailers[contador].year}</li>
         <li>Director(res): ${resultado.trailers[contador].directors}</li>

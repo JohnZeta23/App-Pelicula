@@ -115,13 +115,13 @@
             <label for="link" class="form-label">Link del trailer de la pelicula</label>
             <input type="url" class="form-control" id="link">
           </div>
-
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-primary">Agregar</button>
+          </div>
         </form>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <button type="submit" class="btn btn-primary" onclick="agregarPelicula()">Agregar</button>
-      </div>
+
     </div>
   </div>
 </div>
@@ -173,13 +173,12 @@
             <label for="link" class="form-label">Link del trailer de la pelicula</label>
             <input type="url" class="form-control" id="linkEditar">
           </div>
-
+          <div class="modal-footer">
+            <input type="hidden" id="idPelicula">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-primary">Guardar cambios</button>
+          </div>
         </form>
-      </div>
-      <div class="modal-footer">
-        <input type="hidden" id="idPelicula">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary" onclick="editarPelicula()">Guardar cambios</button>
       </div>
     </div>
   </div>
