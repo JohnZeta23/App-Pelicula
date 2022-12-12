@@ -102,7 +102,7 @@ const trailerPut = async (req, res = response) => {
 const trailerDelete = async (req = request, res = response) => {
    const { id } = req.params
 
-   const trailer = await Movie.findByIdAndUpdate(id, { state: false }, { new: true })
+   const trailer = await Movie.findByIdAndDelete(id)
 
    res.json(trailer)
 }
