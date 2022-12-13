@@ -56,7 +56,7 @@ const cargarPeliculas = async()=>{
         <td>${resultado.trailers[contador].cast}</td>
         <td>${resultado.trailers[contador].rating}</td>
         <td><img src="${resultado.trailers[contador].img.imgURL}" alt="" width = "200px"></td>
-        <td>${resultado.trailers[contador].trailer_link}</td>
+        <td><iframe width="auto" src="${resultado.trailers[contador].trailer_link}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td>
         <td><button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editarModal" onclick="buscarPeliculaPorId('${resultado.trailers[contador].uid}')"><i class="bi bi-pencil-square p-1"></i></i></button></td>
         <td><button class="btn btn-danger" onclick="eliminarPelicula('${resultado.trailers[contador].uid}')"><i class="bi bi-trash p-1"></i></i></button></td>
         </tr>
