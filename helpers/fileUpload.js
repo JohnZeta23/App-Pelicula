@@ -2,32 +2,34 @@ const cloudinary = require('cloudinary').v2
 
 cloudinary.config(process.env.CLOUDINARY_URL)
 
-const imgUpload = async(path) => {
+const imgUpload = async (imgFile, schema) => {
 
-   return await cloudinary.uploader.upload(path, { folder: 'app-pelicula' })
+   const { tempFilePath } = imgFile
+
+   const { public_id, secure_url } = await cloudinary.uploader.upload(tempFilePath, { folder: 'app-pelicula' })
+
+   schema.img = {
+      public_id,
+      imgURL: secure_url
+   }
 
 }
 
 const imgDelete = async(public_id) => {
 
-   return await cloudinary.uploader.destroy(public_id)
+   await cloudinary.uploader.destroy(public_id)
 
 }
 
-const imgUpdate = async (dbPublicId, newIMGPath) => {
+const imgUpdate = async (imgFile, img, schema ) => {
 
-   const { result } = await imgDelete(dbPublicId)
+   const dbPublicId = img.public_id
 
-   if (result === "ok") {
-      const { public_id, secure_url } = await imgUpload(newIMGPath)
-
-      return { public_id, secure_url }
+   if (dbPublicId) {
+      await imgDelete(dbPublicId)
    }
-   else if (result === "not found")
-      return {err_msg:"Please provide correct public_id"}
-   else {
-      return { err_msg: "Try again later." }
-   }
+
+   await imgUpload(imgFile, schema)
 
 }
 
