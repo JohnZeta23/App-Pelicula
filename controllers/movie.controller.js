@@ -28,7 +28,9 @@ const trailersGet = async (req, res = response) => {
 const trailerGetById = async (req, res = response) => {
    const { id } = req.params
    const trailer = await Movie.findById(id)
-   res.json(trailer)
+   res.json({
+      trailer
+   })
 }
 
 const trailerPost = async (req, res = response) => {
@@ -74,10 +76,12 @@ const trailerPut = async (req, res = response) => {
 
          if (imgFile) await imgUpdate(imgFile, img, schema)
 
+         console.log(schema);
+
          const trailer = await Movie.findByIdAndUpdate(id, schema, { new: true })
 
          res.json({
-            upadted: trailer
+            updated: trailer
          })
 
       }
