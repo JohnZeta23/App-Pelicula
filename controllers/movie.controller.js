@@ -76,7 +76,7 @@ const trailerPut = async (req, res = response) => {
 
          if (imgFile) await imgUpdate(imgFile, img, schema)
 
-         console.log(schema);
+         if (!imgFile) schema.img = {public_id: img.public_id,imgURL:img.imgURL}
 
          const trailer = await Movie.findByIdAndUpdate(id, schema, { new: true })
 
