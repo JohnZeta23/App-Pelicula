@@ -162,8 +162,10 @@ document.querySelector("#editarForm").addEventListener('submit',async function()
     if(validateTxt(title) == true){
         
         const datos = new FormData();
-        
-        datos.append("img", img.files[0]);
+
+        if (img.value != ''){
+            datos.append("img", img.files[0]);
+        };
         datos.append("title", title);
         datos.append("year", year);
         datos.append("directors", director);
